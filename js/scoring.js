@@ -351,3 +351,98 @@ export function studyPlan({ testDate, target, bands = {}, now = Date.now() }) {
   else phase = 'foundation';
   return { days, phase, priority, untested, gaps };
 }
+
+/* ------------------------------------------------------------------ */
+/* Answer keys typed in by the learner from their own Cambridge book    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Expand one key cell into every acceptable answer, following the conventions
+ * used in Cambridge IELTS answer keys:
+ *   "(the) library"        → optional words in brackets
+ *   "24 / twenty-four"     → alternatives separated by "/" or " OR "
+ */
+export function expandKey(cell) {
+  const alts = String(cell || '')
+    .split(/\s*\/\s*|\s+OR\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const out = new Set();
+  for (const alt of alts) {
+    const parts = alt.split(/(\([^)]*\))/).filter((p) => p !== '');
+    let variants = [''];
+    for (const p of parts) {
+      if (/^\(.*\)$/.test(p)) {
+        const inner = p.slice(1, -1);
+        variants = variants.flatMap((v) => [v, `${v}${inner}`]);
+      } else variants = variants.map((v) => v + p);
+    }
+    for (const v of variants) {
+      const n = normalizeAnswer(v);
+      if (n) out.add(n);
+    }
+  }
+  return [...out];
+}
+
+/**
+ * Parse a pasted answer key. Accepted line formats:
+ *   "1 library"   "1. (the) library"   "1) TRUE"
+ *   "21-22 B, D"  "21&22 B D"  "21–22 IN EITHER ORDER: B, D"   (letters in either order)
+ * Returns { answers: { n: [accepted...] }, groups: [{ nums:[..], letters:[..] }], errors: [line] }.
+ */
+export function parseKeyText(text) {
+  const answers = {};
+  const groups = [];
+  const errors = [];
+  for (const rawLine of String(text || '').split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    const g = line.match(/^(\d{1,2})\s*(?:-|–|&|and|,)\s*(\d{1,2})\s*[.):]?\s*(?:in either order\s*[:,-]?)?\s*(.+)$/i);
+    if (g) {
+      const a = Number(g[1]);
+      const b = Number(g[2]);
+      const letters = g[3].toUpperCase().replace(/IN EITHER ORDER/g, '').match(/\b[A-Z]\b/g) || [];
+      const nums = [];
+      for (let k = Math.min(a, b); k <= Math.max(a, b); k++) nums.push(k);
+      if (letters.length === nums.length) {
+        groups.push({ nums, letters });
+        continue;
+      }
+    }
+    const m = line.match(/^(\d{1,2})\s*[.):]?\s+(.+)$/);
+    if (m && Number(m[1]) >= 1 && Number(m[1]) <= 40) {
+      const acc = expandKey(m[2]);
+      if (acc.length) {
+        answers[Number(m[1])] = acc;
+        continue;
+      }
+    }
+    errors.push(line);
+  }
+  return { answers, groups, errors };
+}
+
+/**
+ * Grade a 40-question answer sheet against a parsed key. Grouped questions
+ * ("in either order") score one mark per distinct correct letter.
+ */
+export function gradeSheet(responses, key) {
+  const per = {};
+  for (const [n, acc] of Object.entries(key.answers)) {
+    const r = normalizeAnswer(responses[n]);
+    per[n] = !!r && acc.includes(r);
+  }
+  for (const g of key.groups) {
+    const pool = [...g.letters];
+    const given = g.nums.map((n) => normalizeAnswer(responses[n]).toUpperCase());
+    g.nums.forEach((n, i) => {
+      const idx = pool.indexOf(given[i]);
+      per[n] = idx !== -1;
+      if (idx !== -1) pool.splice(idx, 1); // each correct letter can only be credited once
+    });
+  }
+  const total = Object.keys(per).length;
+  const correct = Object.values(per).filter(Boolean).length;
+  return { per, correct, total };
+}

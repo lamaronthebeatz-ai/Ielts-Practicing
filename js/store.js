@@ -12,6 +12,11 @@ const defaults = () => ({
   srs: {}, // vocab id -> card
   activity: {}, // 'YYYY-MM-DD' -> minutes/actions count
   inProgress: {}, // test id -> { responses, remaining, savedAt }
+  grammar: {}, // grammar topic id -> { best, last, at }
+  customVocab: [], // words added from the dictionary
+  customTasks: [], // Writing prompts typed in from the learner's Cambridge books
+  customCards: [], // Speaking cue cards typed in from the learner's Cambridge books
+  cambridgeKeys: {}, // Cambridge test id -> answer key text typed in by the learner
 });
 
 let state = load();
@@ -40,6 +45,11 @@ function migrate(s) {
     srs: s.srs || {},
     activity: s.activity || {},
     inProgress: s.inProgress || {},
+    grammar: s.grammar || {},
+    customVocab: Array.isArray(s.customVocab) ? s.customVocab : [],
+    customTasks: Array.isArray(s.customTasks) ? s.customTasks : [],
+    customCards: Array.isArray(s.customCards) ? s.customCards : [],
+    cambridgeKeys: s.cambridgeKeys || {},
     v: 1,
   };
 }

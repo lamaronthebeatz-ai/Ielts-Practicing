@@ -1,7 +1,7 @@
 import { store, streak, latestBands } from '../store.js';
 import { html, bandClass, fmtBand } from '../ui.js';
 import { overallBand, studyPlan } from '../scoring.js';
-import { vocab } from '../data/vocab.js';
+import { allVocab } from './vocab.js';
 
 const SKILL_VI = { listening: 'Listening', reading: 'Reading', writing: 'Writing', speaking: 'Speaking' };
 
@@ -27,7 +27,7 @@ export function render(el) {
   const plan = studyPlan({ testDate: s.profile.testDate, target, bands });
   const haveAll = ['listening', 'reading', 'writing', 'speaking'].every((k) => bands[k] != null);
   const overall = haveAll ? overallBand(bands.listening, bands.reading, bands.writing, bands.speaking) : null;
-  const due = vocab.filter((v) => !s.srs[v.id] || s.srs[v.id].due <= Date.now()).length;
+  const due = allVocab().filter((v) => !s.srs[v.id] || s.srs[v.id].due <= Date.now()).length;
   const st = streak();
 
   el.innerHTML = String(html`
@@ -77,11 +77,13 @@ export function render(el) {
 
     <h2 style="margin-top:1.5rem">Bắt đầu luyện tập</h2>
     <div class="grid g3">
-      <a class="card linkcard" href="#/listening/l-01"><h3>🎧 Listening Mock Test</h3><p class="muted small">4 phần · 40 câu · ~30 phút. Âm thanh tổng hợp giọng đọc ngay trên thiết bị, chấm điểm & quy đổi band tự động.</p></a>
-      <a class="card linkcard" href="#/reading/ac-r-01"><h3>📖 Academic Reading Mock Test</h3><p class="muted small">3 passages · 40 câu · 60 phút. Giải thích chi tiết từng đáp án, có tô sáng văn bản.</p></a>
+      <a class="card linkcard" href="#/cambridge"><h3>📚 Luyện đề Cambridge IELTS</h3><p class="muted small">Làm đề từ sách Cambridge IELTS của bạn: phiếu trả lời 40 câu, bấm giờ, phát audio, chấm theo đáp án sách và quy đổi band.</p></a>
+      <a class="card linkcard" href="#/grammar"><h3>🧩 Ngữ pháp học thuật</h3><p class="muted small">Giải nghĩa, công thức, cách dùng thực chiến Writing/Speaking, lỗi thường gặp và bài tập cho từng chủ điểm.</p></a>
+      <a class="card linkcard" href="#/listening/l-01"><h3>🎧 Listening Mock Test (đề biên soạn)</h3><p class="muted small">4 phần · 40 câu · ~30 phút. Âm thanh tổng hợp giọng đọc ngay trên thiết bị, chấm điểm & quy đổi band tự động.</p></a>
+      <a class="card linkcard" href="#/reading/ac-r-01"><h3>📖 Reading Mock Test (đề biên soạn)</h3><p class="muted small">3 passages · 40 câu · 60 phút. Giải thích chi tiết từng đáp án, có tô sáng văn bản.</p></a>
       <a class="card linkcard" href="#/writing"><h3>✍ Writing Task 1 & 2</h3><p class="muted small">Bấm giờ, đếm từ, phân tích văn bản, tự chấm theo band descriptors, bài mẫu có chú giải.</p></a>
       <a class="card linkcard" href="#/speaking"><h3>🎙 Speaking Simulation</h3><p class="muted small">Giám khảo đọc câu hỏi, ghi âm câu trả lời, đồng hồ Part 2 chuẩn, phân tích tốc độ nói.</p></a>
-      <a class="card linkcard" href="#/vocab"><h3>🗂 Từ vựng học thuật</h3><p class="muted small">Theo chủ đề Task 2, flashcards với thuật toán lặp lại ngắt quãng (SM-2).</p></a>
+      <a class="card linkcard" href="#/vocab"><h3>🗂 Từ vựng & Từ điển</h3><p class="muted small">Tra từ điển (IPA, phát âm, ví dụ, đồng nghĩa), liên kết Cambridge Anh–Việt; flashcards lặp lại ngắt quãng.</p></a>
       <a class="card linkcard" href="#/guide"><h3>ℹ Cấu trúc đề & cách chấm</h3><p class="muted small">Cập nhật định dạng thi hiện hành, band descriptors, quy tắc làm tròn Overall.</p></a>
     </div>
   `);

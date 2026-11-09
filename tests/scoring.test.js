@@ -114,3 +114,27 @@ test('study plan prioritises the largest gap', () => {
   assert.equal(p.priority[0], 'writing');
   assert.equal(p.phase, 'foundation');
 });
+
+import { expandKey, parseKeyText, gradeSheet } from '../js/scoring.js';
+
+test('Cambridge-style key cells expand optional words and alternatives', () => {
+  assert.deepEqual(expandKey('(the) library').sort(), ['library', 'the library']);
+  assert.deepEqual(expandKey('24 / twenty-four').sort(), ['24', 'twenty-four']);
+  assert.deepEqual(expandKey('(a) (large) house').sort(), ['a house', 'a large house', 'house', 'large house']);
+  assert.deepEqual(expandKey('TRUE'), ['true']);
+});
+
+test('pasted keys parse single answers, either-order groups and report bad lines', () => {
+  const k = parseKeyText('1 library\n2. (the) car park\n3) 24/twenty-four\n21-22 B, D\n23&24 IN EITHER ORDER: A C\nnonsense line');
+  assert.deepEqual(k.answers[1], ['library']);
+  assert.ok(k.answers[2].includes('car park') && k.answers[2].includes('the car park'));
+  assert.equal(k.groups.length, 2);
+  assert.deepEqual(k.groups[0], { nums: [21, 22], letters: ['B', 'D'] });
+  assert.deepEqual(k.errors, ['nonsense line']);
+});
+
+test('sheet grading credits either-order letters once each', () => {
+  const key = parseKeyText('1 (the) library\n21-22 B, D');
+  assert.equal(gradeSheet({ 1: 'Library', 21: 'D', 22: 'B' }, key).correct, 3);
+  assert.equal(gradeSheet({ 1: 'libary', 21: 'B', 22: 'B' }, key).correct, 1); // misspelt; duplicate letter only once
+});

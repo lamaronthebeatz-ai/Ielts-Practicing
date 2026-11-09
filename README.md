@@ -10,7 +10,9 @@ Progressive Web App (PWA) ôn luyện IELTS 4 kỹ năng — hoạt động offl
 | **Reading** | Đề Academic đầy đủ 3 passages / 40 câu / 60 phút: TRUE/FALSE/NOT GIVEN, YES/NO/NOT GIVEN, Matching Headings, Matching Features, Sentence Endings, Summary (word box), Note Completion, Multiple Choice. Tô sáng văn bản, bảng điều hướng câu hỏi, tự lưu bài làm dở, giải thích chỉ rõ bằng chứng cho **từng** đáp án. |
 | **Writing** | Task 1 Academic (line, bar, table, process — biểu đồ SVG), Task 1 General Training (thư trang trọng/bán trang trọng/thân mật), Task 2 (7 dạng đề). Bấm giờ, đếm từ theo cách IELTS, tự lưu nháp, phân tích văn bản (độ dài, chia đoạn, overview, quan điểm, từ nối lạm dụng, từ lặp, viết tắt, đa dạng câu/từ vựng), tự chấm theo band descriptors, bài mẫu có chú giải. |
 | **Speaking** | Mô phỏng bài thi đầy đủ Part 1 → 2 → 3: giám khảo đọc câu hỏi, đồng hồ Part 2 chuẩn (1 phút chuẩn bị + tối đa 2 phút nói), ghi âm toàn bộ để nghe lại/tải về, transcript tự động (nếu trình duyệt hỗ trợ), tốc độ nói (từ/phút), từ đệm, tự chấm theo 4 tiêu chí. |
-| **Từ vựng & ngữ pháp** | Từ vựng học thuật theo chủ đề Task 2/Part 3 kèm collocation, flashcard với thuật toán lặp lại ngắt quãng (SM-2), ngữ pháp trọng tâm band 7+ và lỗi phổ biến của người Việt. |
+| **Luyện đề Cambridge IELTS** | Làm đề từ sách Cambridge IELTS của bạn: phiếu trả lời 40 câu kiểu thi máy tính, bấm giờ, phát file audio của sách ngay trên máy, nhập Answer Key một lần (hỗ trợ quy ước của sách: từ tuỳ chọn trong ngoặc, đáp án thay thế bằng "/", câu chọn chữ cái "in either order"), chấm theo quy tắc IELTS, quy đổi band theo đúng module, lịch sử theo từng cuốn/test. Nhập đề Writing và cue card Speaking từ sách để luyện với trình soạn thảo/ghi âm. |
+| **Từ điển & từ vựng** | Tra từ điển thực (Free Dictionary API — Wiktionary): IPA, phát âm Anh–Anh/Anh–Mỹ/Anh–Úc, định nghĩa, ví dụ, đồng nghĩa/trái nghĩa; liên kết Cambridge Dictionary Anh–Việt, Cambridge English, Oxford Learner's. Từ đã tra lưu lại để xem offline. Nhấp đúp vào từ trong bài Reading (chế độ luyện tập/sau khi nộp) để tra. Thêm từ đã tra vào bộ flashcard SM-2. |
+| **Ngữ pháp học thuật** | 49 chủ điểm / 12 chương (thì & thể, động từ khuyết thiếu, bị động, dạng động từ, câu điều kiện & giả định, mệnh đề, danh từ – mạo từ – lượng từ – hoà hợp chủ vị, so sánh, cấu trúc câu nâng cao, văn phong học thuật, ngôn ngữ số liệu Task 1, tường thuật & câu hỏi). Mỗi chủ điểm: giải nghĩa, công thức, cách dùng + ví dụ, ứng dụng thực chiến Writing/Speaking, lỗi thường gặp (sai → đúng), bài tập chấm tự động. |
 | **Theo dõi** | Band từng kỹ năng, Overall ước tính, lộ trình gợi ý theo ngày thi và kỹ năng yếu nhất, biểu đồ tiến độ, lịch hoạt động, sao lưu/khôi phục JSON. |
 
 ## Tính chính xác & logic chấm điểm
@@ -24,7 +26,7 @@ Progressive Web App (PWA) ôn luyện IELTS 4 kỹ năng — hoạt động offl
 
 Toàn bộ logic chấm điểm nằm trong `js/scoring.js` (hàm thuần, không phụ thuộc DOM) và được kiểm thử. Bộ kiểm thử nội dung đảm bảo: đánh số 1–40 liên tục, đáp án nằm trong phương án, đáp án điền từ xuất hiện nguyên văn trong bài đọc/được nói (hoặc đánh vần) trong bài nghe, không vượt giới hạn từ của chính câu hỏi, mọi câu đều có giải thích.
 
-> Ứng dụng độc lập, không liên kết với British Council, IDP hay Cambridge University Press & Assessment. Đề luyện tập là nội dung biên soạn mới; dữ liệu biểu đồ Task 1 mang tính minh họa.
+> Ứng dụng độc lập, không liên kết với British Council, IDP hay Cambridge University Press & Assessment. Nội dung sách Cambridge IELTS (bài đọc, audio, câu hỏi, đáp án) có bản quyền nên **không** được đưa vào ứng dụng — người học dùng sách của mình; đáp án nhập vào chỉ lưu trên thiết bị. Đề mẫu có sẵn trong app là nội dung biên soạn mới theo đúng định dạng; dữ liệu biểu đồ Task 1 mang tính minh họa.
 
 ## Chạy cục bộ
 
