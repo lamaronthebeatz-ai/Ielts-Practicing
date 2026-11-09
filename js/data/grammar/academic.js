@@ -1,0 +1,461 @@
+// Chương 9–12 — Cấu trúc câu nâng cao, văn phong học thuật, ngôn ngữ số liệu, câu tường thuật & câu hỏi.
+
+export const chapters = [
+  { id: 'sentences', title: '9. Cấu trúc câu nâng cao', en: 'Advanced sentence structures' },
+  { id: 'style', title: '10. Văn phong học thuật', en: 'Academic style' },
+  { id: 'data', title: '11. Ngôn ngữ mô tả số liệu (Task 1)', en: 'Language for describing data' },
+  { id: 'reporting', title: '12. Tường thuật & câu hỏi', en: 'Reporting and questions' },
+];
+
+export const topics = [
+  {
+    ch: 'sentences',
+    id: 'sentence-types',
+    title: 'Các loại câu & lỗi cấu trúc câu',
+    en: 'Sentence types; run-ons, comma splices, fragments',
+    what: 'Band 7 GRA yêu cầu "a variety of complex structures" với "frequent error-free sentences". Cần làm chủ 4 loại câu và tránh 3 lỗi cấu trúc nghiêm trọng.',
+    forms: [
+      ['Câu đơn', 'Một mệnh đề độc lập: Prices rose.'],
+      ['Câu ghép', 'MĐ độc lập + , + FANBOYS (for, and, nor, but, or, yet, so) + MĐ độc lập · hoặc MĐ ; MĐ'],
+      ['Câu phức', 'MĐ độc lập + MĐ phụ (because, although, which, if, when…)'],
+      ['Câu ghép – phức', 'Kết hợp cả hai'],
+      ['Lỗi comma splice', 'Hai mệnh đề độc lập nối bằng dấu phẩy ✗'],
+      ['Lỗi fragment', 'Mệnh đề phụ đứng một mình như câu ✗ (Because it is cheap.)'],
+      ['Lỗi run-on', 'Hai mệnh đề độc lập dính liền không dấu ✗'],
+    ],
+    uses: [
+      ['Câu ghép', 'Remote work saves time, but it can be isolating.'],
+      ['Câu phức', 'Although remote work saves time, it can be isolating.'],
+      ['Ghép – phức', 'While the policy was popular, it was expensive, so it was eventually abandoned.'],
+    ],
+    ielts: [
+      'Mục tiêu: mỗi đoạn có ít nhất 1–2 câu phức chính xác; xen câu đơn ngắn để nhấn mạnh.',
+      'Tự soát: mỗi câu có ít nhất một mệnh đề độc lập (S + V chia thì) chưa?',
+    ],
+    mistakes: [
+      ['Many people live in cities, this causes congestion.', 'Many people live in cities, which causes congestion. / … cities; this causes congestion.', 'Comma splice.'],
+      ['Because public transport is cheap. Many people use it.', 'Because public transport is cheap, many people use it.', 'Fragment.'],
+    ],
+    quiz: [
+      ['Which sentence is correct?', ['Prices rose, demand fell.', 'Prices rose; demand fell.', 'Prices rose demand fell.', 'Prices rose, however demand fell.'], 1, 'Dấu chấm phẩy nối hai mệnh đề độc lập.'],
+      ['Which is a fragment?', ['Although it was late.', 'It was late.', 'It was late, so we left.', 'We left because it was late.'], 0, 'Mệnh đề phụ đứng một mình.'],
+      ['Choose the correct joining: "Fees rose ___ fewer students applied."', [', so', ', therefore', ' so,', ', however'], 0, ', so (FANBOYS) nối hai mệnh đề.'],
+    ],
+  },
+  {
+    ch: 'sentences',
+    id: 'participle-clauses',
+    title: 'Mệnh đề phân từ (rút gọn mệnh đề trạng ngữ)',
+    en: 'Participle clauses',
+    what: 'Rút gọn mệnh đề khi hai vế CÙNG chủ ngữ, giúp câu súc tích, học thuật.',
+    forms: [
+      ['Chủ động, đồng thời', 'V-ing …, S + V'],
+      ['Chủ động, xảy ra trước', 'Having + V3 …, S + V'],
+      ['Bị động', 'V3 …, S + V  ·  Having been + V3 …'],
+      ['Kết quả (cuối câu)', 'S + V …, V-ing … (… , leading to / resulting in / causing …)'],
+      ['Với liên từ', 'While/When/After/Before/Since + V-ing · Once/If/Unless/Although + V3'],
+    ],
+    uses: [
+      ['Đồng thời', 'Living in the city, I rarely see the stars.'],
+      ['Trước', 'Having finished the course, she applied for jobs abroad.'],
+      ['Bị động', 'Built in 1902, the metro is the oldest in the country.'],
+      ['Kết quả', 'Fuel prices doubled, forcing many people to use public transport.'],
+    ],
+    ielts: [
+      'Task 1: "…, reaching a peak of 60% in 2015" — nối xu hướng và đỉnh trong một câu.',
+      'Task 2: ", leading to…" / ", resulting in…" để nêu hệ quả gọn.',
+    ],
+    mistakes: [
+      ['Walking down the street, the rain started.', 'While I was walking down the street, the rain started.', 'Dangling participle: chủ ngữ không khớp.'],
+      ['Having finish the exam, …', 'Having finished the exam, …', 'Having + V3.'],
+    ],
+    quiz: [
+      ['The figure rose steadily, ___ a peak of 80% in 2020.', ['reached', 'reaching', 'to reach', 'has reached'], 1, 'Phân từ chỉ kết quả/tiếp nối.'],
+      ['___ in 1850, the bridge is still in use.', ['Building', 'Built', 'Having built', 'To build'], 1, 'Cây cầu được xây → bị động.'],
+      ['___ the report, he sent it to his manager.', ['Writing', 'Having written', 'Written', 'Write'], 1, 'Hành động xảy ra trước.'],
+    ],
+  },
+  {
+    ch: 'sentences',
+    id: 'inversion',
+    title: 'Đảo ngữ nhấn mạnh',
+    en: 'Inversion for emphasis',
+    what: 'Đưa trạng từ/cụm phủ định hoặc giới hạn lên đầu câu, sau đó đảo trợ động từ lên trước chủ ngữ. Trang trọng, dùng tiết chế.',
+    forms: [
+      ['Công thức', 'Cụm phủ định/giới hạn + trợ động từ + S + V'],
+      ['Phủ định', 'Never · Rarely · Seldom · Hardly ever · At no time · Under no circumstances · In no way'],
+      ['Not only', 'Not only + aux + S + V, but S + also + V'],
+      ['Thời gian', 'No sooner + had + S + V3 + than … · Hardly/Scarcely + had + S + V3 + when …'],
+      ['Only', 'Only when/if/after … + aux + S + V · Only by + V-ing + aux + S + V'],
+      ['So / Such', 'So + adj + be + S + that … · Such + be + N + that …'],
+    ],
+    uses: [
+      ['Not only', 'Not only does cycling reduce pollution, but it also improves health.'],
+      ['Only', 'Only by investing in education can a country achieve long-term growth.'],
+      ['Under no circumstances', 'Under no circumstances should children be left unsupervised near water.'],
+    ],
+    ielts: [
+      '1 câu đảo ngữ đúng trong Task 2 là điểm cộng; 3–4 câu làm văn gượng ép.',
+      'Rất hiếm trong Speaking — nghe không tự nhiên.',
+    ],
+    mistakes: [
+      ['Not only cycling reduces pollution, but …', 'Not only does cycling reduce pollution, but …', 'Thiếu đảo trợ động từ.'],
+      ['Only by investing we can grow.', 'Only by investing can we grow.', 'Đảo ở mệnh đề chính.'],
+    ],
+    quiz: [
+      ['Rarely ___ such a dramatic increase.', ['we have seen', 'have we seen', 'we saw', 'saw we'], 1, 'Rarely + aux + S.'],
+      ['No sooner had the film started ___ the power went off.', ['when', 'than', 'that', 'then'], 1, 'No sooner … than.'],
+      ['Only when the law changed ___ improve.', ['did conditions', 'conditions did', 'conditions', 'had conditions to'], 0, 'Only when … + aux + S + V.'],
+    ],
+  },
+  {
+    ch: 'sentences',
+    id: 'cleft-emphasis',
+    title: 'Câu chẻ & cấu trúc nhấn mạnh',
+    en: 'Cleft sentences and emphasis',
+    what: 'Làm nổi bật một thành phần câu — hữu ích khi nêu luận điểm chính hoặc sửa hiểu lầm.',
+    forms: [
+      ['It-cleft', 'It is/was + thành phần nhấn mạnh + that/who + phần còn lại'],
+      ['Wh-cleft', 'What + S + V + is/was + N/clause'],
+      ['All / The reason / The thing', 'All (that) we need is … · The reason why … is that …'],
+      ['do/does/did nhấn mạnh', 'S + do/does/did + V (I do believe …)'],
+    ],
+    uses: [
+      ['It-cleft', 'It is the government that should take responsibility, not individuals.'],
+      ['Wh-cleft', 'What worries many parents is the cost of childcare.'],
+      ['Reason', 'The main reason why people move to cities is that there are more jobs.'],
+    ],
+    ielts: [
+      '"The reason why … is that …" (KHÔNG phải "is because") — chuẩn trong văn viết học thuật.',
+      'Speaking Part 3: "What I find interesting is that…" giúp câu trả lời trôi chảy, có trọng tâm.',
+    ],
+    mistakes: [
+      ['The reason is because …', 'The reason is that …', 'Văn trang trọng tránh "reason … because".'],
+      ['What I need it is time.', 'What I need is time.', 'Không thêm it.'],
+    ],
+    quiz: [
+      ['___ was the cost that made the project fail.', ['It', 'What', 'This', 'There'], 0, 'It-cleft.'],
+      ['What most people want ___ a secure job.', ['are', 'is', 'it is', 'be'], 1, 'Wh-cleft + is.'],
+      ['The reason why prices rose is ___ demand increased.', ['because', 'that', 'why', 'due to'], 1, 'The reason … is that.'],
+    ],
+  },
+  {
+    ch: 'sentences',
+    id: 'parallelism-apposition',
+    title: 'Cấu trúc song song & đồng vị ngữ',
+    en: 'Parallel structure and apposition',
+    what: 'Song song: các thành phần nối bằng and/or/but/both…and/either…or/not only…but also phải cùng dạng ngữ pháp. Đồng vị ngữ: cụm danh từ giải thích cho danh từ đứng trước.',
+    forms: [
+      ['Song song', 'N, N and N · to V, to V and to V · V-ing, V-ing and V-ing'],
+      ['Cặp liên từ', 'both A and B · either A or B · neither A nor B · not only A but (also) B (A, B cùng dạng)'],
+      ['Đồng vị ngữ', 'N, (a/the) N phrase, …'],
+    ],
+    uses: [
+      ['Song song', 'The policy aims to reduce traffic, improve air quality and encourage exercise.'],
+      ['Cặp liên từ', 'Remote work benefits both employees and employers.'],
+      ['Đồng vị ngữ', 'Singapore, a city with little arable land, imports most of its food.'],
+    ],
+    ielts: [
+      'Lỗi không song song làm câu khó đọc → ảnh hưởng cả CC và GRA.',
+    ],
+    mistakes: [
+      ['The job requires creativity, patience and to work hard.', '… creativity, patience and hard work.', 'Không song song.'],
+      ['Not only he is smart but also hard-working.', 'He is not only smart but also hard-working.', 'Đặt cặp liên từ cạnh hai thành phần song song.'],
+    ],
+    quiz: [
+      ['Exercise improves ___ .', ['sleep, mood and concentrating', 'sleep, mood and concentration', 'sleeping, mood and to concentrate', 'to sleep, mood and concentration'], 1, 'Ba danh từ song song.'],
+      ['She is ___ a doctor ___ a writer.', ['both / and', 'either / and', 'neither / or', 'not only / and'], 0, 'both … and.'],
+      ['Hue, ___ , attracts many tourists.', ['which the former capital', 'the former imperial capital', 'is the former capital', 'it is the former capital'], 1, 'Đồng vị ngữ là cụm danh từ.'],
+    ],
+  },
+  {
+    ch: 'style',
+    id: 'nominalisation',
+    title: 'Danh từ hoá',
+    en: 'Nominalisation',
+    what: 'Chuyển động từ/tính từ thành danh từ để câu cô đọng, khách quan, đậm chất học thuật. Đây là đặc trưng nổi bật nhất của văn học thuật.',
+    forms: [
+      ['Động từ → danh từ', 'increase → an increase in · reduce → a reduction in · develop → the development of · fail → the failure of · decide → the decision to'],
+      ['Tính từ → danh từ', 'important → the importance of · available → the availability of · difficult → difficulty in V-ing'],
+      ['Mẫu câu', 'There was + a/an + adj + N + in + X · N + of + X + V …'],
+    ],
+    uses: [
+      ['Task 1', 'Sales increased sharply in 2010. → There was a sharp increase in sales in 2010.'],
+      ['Task 2', 'Because cities are growing rapidly, … → The rapid growth of cities has led to …'],
+      ['Chủ ngữ trừu tượng', 'The introduction of tuition fees reduced applications.'],
+    ],
+    ielts: [
+      'Xen kẽ câu động từ và câu danh từ hoá trong Task 1 để tránh lặp cấu trúc.',
+      'Không danh từ hoá quá mức — câu sẽ khó hiểu.',
+    ],
+    mistakes: [
+      ['There was an increase of sales.', 'There was an increase in sales.', 'increase/decrease/rise/fall + in + đối tượng; + of + số lượng.'],
+      ['The develop of technology …', 'The development of technology …', 'Dùng đúng dạng danh từ.'],
+    ],
+    quiz: [
+      ['There was a significant ___ in unemployment.', ['reduce', 'reduction', 'reducing', 'reduced'], 1, 'Danh từ: reduction.'],
+      ['The figure rose by 20%. → There was a rise ___ 20%.', ['in', 'of', 'by', 'to'], 1, 'a rise of + số lượng.'],
+      ['___ of public transport is essential for growing cities.', ['Improve', 'The improvement', 'Improving of', 'Improved'], 1, 'Danh từ hoá làm chủ ngữ.'],
+    ],
+  },
+  {
+    ch: 'style',
+    id: 'hedging',
+    title: 'Hedging & boosting (mức độ chắc chắn)',
+    en: 'Hedging and boosting',
+    what: 'Điều chỉnh mức độ khẳng định cho phù hợp bằng chứng. Band descriptors phạt việc "over-generalise"; hedging giúp lập luận chính xác và học thuật.',
+    forms: [
+      ['Modal', 'may · might · could · can (khả năng chung)'],
+      ['Động từ', 'tend to · appear to · seem to · suggest · indicate'],
+      ['Tính từ/trạng từ', 'likely · possible · probably · arguably · largely · generally · to some extent · in many cases'],
+      ['Lượng từ', 'many · most · some · a majority of (thay cho all/everyone)'],
+      ['Boosting (khẳng định mạnh)', 'clearly · undoubtedly · there is little doubt that · it is evident that'],
+    ],
+    uses: [
+      ['Hedging', 'Social media may contribute to feelings of loneliness among teenagers.'],
+      ['Khái quát hoá an toàn', 'Young people tend to be more comfortable with new technology.'],
+      ['Boosting có cơ sở', 'There is little doubt that smoking damages health.'],
+    ],
+    ielts: [
+      'Thay "Everyone knows that…" → "It is widely accepted that…"; "always" → "often/in most cases".',
+      'Không hedging quá mức đến mức không còn quan điểm — Task 2 vẫn cần lập trường rõ.',
+    ],
+    mistakes: [
+      ['All teenagers are addicted to their phones.', 'Many teenagers appear to be overly dependent on their phones.', 'Khái quát hoá tuyệt đối.'],
+    ],
+    quiz: [
+      ['Which is the most academic?', ['Video games make kids violent.', 'Video games always cause violence.', 'Some studies suggest that violent video games may increase aggression.', 'Everybody knows games are bad.'], 2, 'Hedging + dẫn chứng.'],
+      ['Older people ___ to be less familiar with online banking.', ['tend', 'are tend', 'tends', 'tending'], 0, 'tend to + V.'],
+      ['It is ___ that prices will rise further.', ['likely', 'likelihood', 'like', 'liking'], 0, 'It is likely that…'],
+    ],
+  },
+  {
+    ch: 'style',
+    id: 'cohesion-reference',
+    title: 'Liên kết & quy chiếu',
+    en: 'Cohesion and referencing',
+    what: 'Coherence & Cohesion đánh giá cách nối ý trong và giữa các câu. Quy chiếu (this, these, such, the former/latter, it, they) giúp tránh lặp từ — band 6 thường bị nhận xét "may not always use referencing clearly".',
+    forms: [
+      ['this/these + danh từ tóm tắt', 'This trend · This problem · These measures · Such a policy'],
+      ['the former / the latter', 'cái trước / cái sau (khi có đúng hai đối tượng)'],
+      ['Thay thế', 'one/ones · do so · that of / those of'],
+      ['Từ nối theo chức năng', 'Bổ sung: Furthermore, Moreover · Tương phản: However, By contrast · Ví dụ: For example, For instance · Kết quả: As a result, Consequently · Kết luận: In conclusion'],
+    ],
+    uses: [
+      ['Tóm tắt ý trước', 'Many young people cannot afford housing. This problem is particularly severe in large cities.'],
+      ['former/latter', 'Some favour trains, others buses; the former are faster, while the latter are cheaper.'],
+      ['do so', 'Governments should cut emissions, and they must do so quickly.'],
+    ],
+    ielts: [
+      '"This" đứng một mình dễ mơ hồ → dùng "This + danh từ" (This shift, This approach).',
+      'Không mở MỌI câu bằng từ nối: band descriptors đánh giá thấp cohesive devices "mechanical/overused".',
+    ],
+    mistakes: [
+      ['Pollution is rising. It causes many diseases. It also affects animals. It is a big problem.', 'Pollution is rising, causing many diseases and harming wildlife. This problem …', 'Lặp "It" máy móc.'],
+      ['Moreover, … Moreover, … Moreover, …', 'Đa dạng hoá hoặc lược bớt từ nối.', 'Lạm dụng.'],
+    ],
+    quiz: [
+      ['Cars and bicycles are both common; ___ cause pollution, whereas the latter do not.', ['the former', 'the latter', 'these', 'that'], 0, 'the former = cars.'],
+      ['Fees doubled. ___ led to a fall in applications.', ['It', 'This increase', 'Which', 'That one'], 1, 'This + danh từ tóm tắt rõ ràng.'],
+      ['The population of Lagos is larger than ___ of Cairo.', ['this', 'that', 'those', 'it'], 1, 'that of (thay population).'],
+    ],
+  },
+  {
+    ch: 'style',
+    id: 'linkers-grammar',
+    title: 'Ngữ pháp của từ nối & dấu câu',
+    en: 'Grammar of linking words and punctuation',
+    what: 'Từ nối thuộc ba nhóm ngữ pháp khác nhau; dùng sai nhóm gây lỗi cấu trúc. Dấu câu đúng là một phần của tiêu chí GRA ("good control of grammar and punctuation").',
+    forms: [
+      ['Liên từ phụ thuộc (+ mệnh đề, trong cùng câu)', 'although, because, while, whereas, since, unless, if'],
+      ['Liên từ kết hợp (giữa hai mệnh đề, sau dấu phẩy)', 'and, but, so, yet, or'],
+      ['Trạng từ liên kết (đầu câu/sau ;)', 'However, Therefore, Moreover, Nevertheless, In addition, As a result, Consequently'],
+      ['Giới từ (+ N/V-ing)', 'despite, in spite of, due to, because of, in addition to, apart from'],
+      ['Dấu chấm phẩy', 'nối hai mệnh đề độc lập liên quan chặt; trước trạng từ liên kết'],
+      ['Dấu hai chấm', 'trước danh sách/giải thích, sau một mệnh đề hoàn chỉnh'],
+      ['Dấu phẩy', 'sau mệnh đề phụ đứng đầu; quanh mệnh đề không xác định; sau trạng từ liên kết đầu câu'],
+    ],
+    uses: [
+      ['Trạng từ liên kết', 'Public transport is cheap. However, it is often overcrowded.'],
+      ['Chấm phẩy', 'Public transport is cheap; however, it is often overcrowded.'],
+      ['In addition to', 'In addition to reducing traffic, cycling improves health.'],
+      ['Hai chấm', 'The plan has two aims: to cut costs and to reduce waste.'],
+    ],
+    ielts: [
+      '"In addition to" + V-ing (to là giới từ); "Besides" + V-ing.',
+      'Không bắt đầu câu bằng "And", "But", "So" trong Writing học thuật.',
+    ],
+    mistakes: [
+      ['Buses are cheap, however they are slow.', 'Buses are cheap; however, they are slow. / Buses are cheap, but they are slow.', 'Comma splice với however.'],
+      ['In addition to reduce costs, …', 'In addition to reducing costs, …', 'to là giới từ.'],
+      ['Although it is cheap. Many people dislike it.', 'Although it is cheap, many people dislike it.', 'Fragment.'],
+    ],
+    quiz: [
+      ['Choose the correctly punctuated sentence.', ['Fees rose, however enrolment grew.', 'Fees rose; however, enrolment grew.', 'Fees rose however, enrolment grew.', 'Fees rose. however enrolment grew.'], 1, '; however,'],
+      ['___ being expensive, the course is very popular.', ['Although', 'Despite', 'However', 'Even though'], 1, 'Giới từ + V-ing.'],
+      ['The city has three problems ___ traffic, noise and pollution.', [';', ':', ',', '.'], 1, 'Dấu hai chấm trước danh sách.'],
+    ],
+  },
+  {
+    ch: 'data',
+    id: 'trend-language',
+    title: 'Ngôn ngữ xu hướng & giới từ đi kèm',
+    en: 'Describing trends: verbs, nouns and prepositions',
+    what: 'Bộ công cụ cốt lõi cho biểu đồ đường, cột theo thời gian. Giới từ sai (rise of/in/by/to) là lỗi rất phổ biến.',
+    forms: [
+      ['Động từ tăng/giảm', 'rise, increase, grow, climb, surge, soar · fall, decrease, decline, drop, dip, plummet'],
+      ['Ổn định/dao động', 'remain stable/steady/unchanged · level off · plateau · stabilise · fluctuate (around/between)'],
+      ['Đỉnh/đáy', 'peak at · reach a peak of · hit a low of · bottom out at'],
+      ['Trạng từ ↔ tính từ', 'rise sharply ↔ a sharp rise · dramatically/dramatic · steadily/steady · gradually/gradual · slightly/slight · significantly/significant'],
+      ['Giới từ động từ', 'rise from X to Y · rise by + lượng thay đổi · stand at + giá trị · reach + giá trị'],
+      ['Giới từ danh từ', 'a rise in + đối tượng · a rise of + lượng thay đổi · a rise to + giá trị mới'],
+    ],
+    uses: [
+      ['Động từ', 'The number of visitors rose from 2 million to 5 million.'],
+      ['Danh từ', 'There was a dramatic rise of 3 million in the number of visitors.'],
+      ['Đỉnh', 'Sales peaked at 800 units in July before falling sharply.'],
+      ['Stand at', 'In 2000, the figure stood at 45%.'],
+    ],
+    ielts: [
+      'Không viết "increased dramatically" cho thay đổi nhỏ: chọn trạng từ khớp độ lớn dữ liệu (độ chính xác LR).',
+      'Phần trăm: "rose by 10 percentage points" (từ 20% lên 30%) khác "rose by 10%".',
+    ],
+    mistakes: [
+      ['The sales increased 20%.', 'Sales increased by 20%.', 'Thiếu by.'],
+      ['There was an increase of sales.', 'There was an increase in sales.', 'in + đối tượng.'],
+      ['It was peaked at 60%.', 'It peaked at 60%.', 'peak là nội động từ.'],
+    ],
+    quiz: [
+      ['Unemployment fell ___ 8% ___ 5%.', ['from / to', 'by / to', 'of / at', 'at / by'], 0, 'from … to.'],
+      ['There was a slight decline ___ the number of births.', ['of', 'in', 'by', 'at'], 1, 'decline in + đối tượng.'],
+      ['In 1990, car ownership ___ 30%.', ['stood at', 'stood on', 'was stood at', 'stands at'], 0, 'stand at + giá trị (quá khứ).'],
+    ],
+  },
+  {
+    ch: 'data',
+    id: 'proportion-approximation',
+    title: 'Tỷ lệ, phần trăm & ước lượng',
+    en: 'Proportions, percentages and approximation',
+    what: 'Biểu đồ tròn, bảng, cột: cần diễn đạt tỷ lệ đa dạng và ước lượng chính xác.',
+    forms: [
+      ['Chiếm', 'account for · make up · constitute · represent + X%'],
+      ['Danh từ', 'the proportion / percentage / share / figure for + N'],
+      ['Phân số', 'a quarter · a third · half · two-thirds · three-quarters · one in five'],
+      ['Ước lượng', 'approximately · roughly · around · about · nearly · almost · just under · just over · well over'],
+      ['Đa số/thiểu số', 'the majority of · a significant minority of · a small fraction of'],
+    ],
+    uses: [
+      ['Chiếm', 'Coal accounted for just under half of total energy production.'],
+      ['Phân số', 'Roughly one in five adults never exercises.'],
+      ['Figure for', 'The figure for Japan was considerably lower, at 12%.'],
+    ],
+    ielts: [
+      'Luân phiên: 49% → "just under half"; 26% → "roughly a quarter"; 67% → "around two-thirds".',
+      'Không dùng "percent" với "the percentage" sai cách: "The percentage of X was 20%", không "The percentage was 20 percentage".',
+    ],
+    mistakes: [
+      ['Coal accounted 40%.', 'Coal accounted for 40%.', 'account for.'],
+      ['The percentage of women was higher than men.', '… higher than that of men / the percentage for men.', 'So sánh cùng loại.'],
+    ],
+    quiz: [
+      ['Wind power ___ 15% of electricity generation.', ['accounted for', 'accounted', 'was accounted for', 'made'], 0, 'account for.'],
+      ['26% is best described as ___ .', ['just over a quarter', 'roughly a third', 'well over half', 'just under a fifth'], 0, '26% lớn hơn 25% một chút → just over a quarter.'],
+      ['The ___ for France was 20%.', ['figure', 'number', 'amount', 'count'], 0, 'the figure for + quốc gia.'],
+    ],
+  },
+  {
+    ch: 'data',
+    id: 'process-map-language',
+    title: 'Ngôn ngữ quy trình & bản đồ',
+    en: 'Process and map language',
+    what: 'Process: bị động hiện tại + từ chỉ trình tự. Map: bị động quá khứ/hiện tại hoàn thành + giới từ vị trí, hướng.',
+    forms: [
+      ['Trình tự', 'First, / To begin with, · Next, / Then, / After this, / Following this, · Once / After + mệnh đề · Subsequently, · Finally, / In the final stage,'],
+      ['Process bị động', 'is/are + V3 (is collected, are sorted, is heated to, is transported to)'],
+      ['Map thay đổi', 'was replaced by · was converted into · was demolished · was extended · was relocated · has been constructed'],
+      ['Vị trí', 'to the north/south of · in the north-east · adjacent to · opposite · alongside · next to · between'],
+      ['Overview', 'Process: số giai đoạn, bắt đầu – kết thúc, chu trình/tuyến tính · Map: thay đổi lớn nhất, đô thị hoá, mất/tăng cây xanh'],
+    ],
+    uses: [
+      ['Process', 'Once the bottles have been collected, they are transported to a plant, where they are sorted by colour.'],
+      ['Map', 'Between 2000 and 2020, the farmland to the east of the river was converted into a housing estate.'],
+    ],
+    ielts: [
+      'Process dùng mệnh đề quan hệ "where…" và phân từ để nối các bước → tránh 10 câu ngắn rời rạc.',
+    ],
+    mistakes: [
+      ['The bottles collect from bins.', 'The bottles are collected from bins.', 'Thiếu bị động.'],
+      ['The park was build in 2010.', 'The park was built in 2010.', 'V3 bất quy tắc.'],
+    ],
+    quiz: [
+      ['The leaves ___ in the sun for two days.', ['dry', 'are dried', 'are drying', 'dried'], 1, 'Process → bị động.'],
+      ['The old factory ___ a shopping centre.', ['was converted into', 'converted to', 'was converting', 'has converted into'], 0, 'was converted into.'],
+      ['The car park is located ___ the north of the station.', ['in', 'to', 'at', 'on'], 1, 'to the north of (bên ngoài, phía bắc).'],
+    ],
+  },
+  {
+    ch: 'reporting',
+    id: 'reported-speech',
+    title: 'Câu tường thuật & động từ tường thuật',
+    en: 'Reported speech and reporting verbs',
+    what: 'Thuật lại lời nói/ý kiến. Trong học thuật, động từ tường thuật thể hiện thái độ người viết với nguồn.',
+    forms: [
+      ['Lùi thì', 'hiện tại → quá khứ · quá khứ/hiện tại hoàn thành → quá khứ hoàn thành · will → would · can → could (không bắt buộc khi sự việc vẫn đúng)'],
+      ['Câu hỏi tường thuật', 'S + asked + (O) + if/whether/wh- + S + V (không đảo)'],
+      ['Mệnh lệnh', 'tell/ask/advise/warn + O + (not) to V'],
+      ['Động từ + that', 'argue, claim, suggest, state, point out, maintain, acknowledge, admit + that'],
+      ['Động từ + V-ing / to V', 'deny/admit/recommend + V-ing · agree/refuse/promise/threaten + to V · accuse sb of V-ing · blame sb for V-ing'],
+    ],
+    uses: [
+      ['Lời nói', 'She said that she was moving to Canada.'],
+      ['Câu hỏi', 'The examiner asked me where I lived.'],
+      ['Học thuật', 'Critics argue that the policy unfairly targets low-income families.'],
+      ['Thái độ', 'Proponents claim that … (người viết giữ khoảng cách) vs Research shows that … (chấp nhận)'],
+    ],
+    ielts: [
+      'Task 2 discussion: "Some argue that…, while others maintain that…" — động từ tường thuật đa dạng.',
+    ],
+    mistakes: [
+      ['He asked me where did I live.', 'He asked me where I lived.', 'Không đảo trong câu hỏi tường thuật.'],
+      ['She suggested me to apply.', 'She suggested that I (should) apply. / She suggested applying.', 'suggest không + O + to V.'],
+      ['He said me that …', 'He told me that … / He said that …', 'say không có tân ngữ người trực tiếp.'],
+    ],
+    quiz: [
+      ['She asked me ___ .', ['what time it was', 'what time was it', 'what time is it', 'it was what time'], 0, 'Không đảo.'],
+      ['The manager ___ us that the office would close.', ['said', 'told', 'spoke', 'talked'], 1, 'tell + O.'],
+      ['He denied ___ the money.', ['to take', 'taking', 'take', 'that taking'], 1, 'deny + V-ing.'],
+    ],
+  },
+  {
+    ch: 'reporting',
+    id: 'question-forms',
+    title: 'Câu hỏi, câu hỏi gián tiếp & phản hồi trong Speaking',
+    en: 'Questions, indirect questions and response language',
+    what: 'Speaking đánh giá khả năng hiểu và phản hồi tự nhiên. Biết cấu trúc câu hỏi giúp nghe đúng thì cần trả lời; câu hỏi gián tiếp dùng để xin làm rõ.',
+    forms: [
+      ['Câu hỏi Yes/No', 'Aux + S + V? → trả lời ngay Yes/No + mở rộng'],
+      ['Wh-', 'Wh- + aux + S + V? · Who/What làm chủ ngữ: Who + V?'],
+      ['Gián tiếp (lịch sự)', 'Could you tell me / Do you know + wh-/if + S + V?'],
+      ['Xin nhắc lại/làm rõ', 'Sorry, could you repeat the question? · Do you mean …? · What exactly do you mean by …?'],
+      ['Câu hỏi đuôi', 'Mệnh đề khẳng định + đuôi phủ định và ngược lại'],
+    ],
+    uses: [
+      ['Nhận diện thì', '"Did you enjoy school?" → trả lời quá khứ: "Yes, I really did, especially …"'],
+      ['Làm rõ (Part 3)', 'Sorry, do you mean in my country or globally?'],
+      ['Gián tiếp', 'I\'m not sure what the best solution would be, but …'],
+    ],
+    ielts: [
+      'Được phép xin nhắc lại câu hỏi trong Part 1 & 3 mà không bị trừ điểm; Part 3 có thể xin giải thích từ.',
+      'Trả lời đúng thì của câu hỏi = điểm GRA dễ ăn nhất.',
+    ],
+    mistakes: [
+      ['Can you tell me where is the station?', 'Can you tell me where the station is?', 'Câu hỏi gián tiếp không đảo.'],
+      ['Q: Do you like reading? A: Yes, I like. ', 'Yes, I do. / Yes, I really enjoy it.', 'like cần tân ngữ.'],
+    ],
+    quiz: [
+      ['Do you know ___ ?', ['when does the library open', 'when the library opens', 'when opens the library', 'the library opens when'], 1, 'Không đảo.'],
+      ['It\'s a beautiful city, ___ ?', ['isn\'t it', 'is it', 'doesn\'t it', 'it isn\'t'], 0, 'Khẳng định → đuôi phủ định.'],
+      ['"Have you ever been abroad?" — best start:', ['Yes, I went.', 'Yes, I have — I went to Thailand last year.', 'Yes, I have went.', 'Yes, I was.'], 1, 'Trả lời bằng trợ động từ của câu hỏi + mở rộng đúng thì.'],
+    ],
+  },
+];

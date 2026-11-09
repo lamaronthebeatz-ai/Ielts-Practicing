@@ -7,9 +7,12 @@ import { lineChart, barChart } from '../charts.js';
 
 const ALL = [...task1Academic.map((t) => ({ ...t, task: 1, module: 'academic' })), ...task1General.map((t) => ({ ...t, task: 1, module: 'general' })), ...task2.map((t) => ({ ...t, task: 2, module: 'both' }))];
 
+const customTasks = () => store.get().customTasks || [];
+
 export function render(el, id) {
   if (!id) return renderList(el);
-  const t = ALL.find((x) => x.id === id);
+  if (id === 'new') return renderNew(el);
+  const t = ALL.find((x) => x.id === id) || customTasks().find((x) => x.id === id);
   if (!t) {
     el.innerHTML = String(html`<div class="alert bad">Không tìm thấy đề.</div>`);
     return;
@@ -38,6 +41,11 @@ function renderList(el) {
     <details style="margin-top:.75rem"><summary>Xem Task 1 của ${gt ? 'Academic' : 'General Training'}</summary>
       <div class="grid g3">${(gt ? task1Academic : task1General).map((t) => item({ ...t, task: 1 }))}</div>
     </details>
+    <h2 style="margin-top:1.5rem">Đề từ sách Cambridge IELTS của bạn</h2>
+    <div class="grid g3">
+      ${customTasks().map((t) => item(t))}
+      <a class="card linkcard" href="#/writing/new"><h3>＋ Nhập đề từ sách</h3><p class="small muted">Gõ/dán đề Writing Task 1 hoặc Task 2 từ sách Cambridge IELTS để luyện với bấm giờ, phân tích và tự chấm.</p></a>
+    </div>
     <h2 style="margin-top:1.5rem">Task 2 — Essay</h2>
     <div class="grid g3">${task2.map((t) => item({ ...t, task: 2 }))}</div>
     <div class="card" style="margin-top:1.5rem">
@@ -45,6 +53,36 @@ function renderList(el) {
       <div class="grid g2">${writingLanguageBank.map((b) => html`<div><h4>${b.title}</h4><ul class="ticks small">${b.items.map((i) => html`<li>${i}</li>`)}</ul></div>`)}</div>
     </div>
   `);
+}
+
+function renderNew(el) {
+  const gt = store.get().profile.module === 'general';
+  el.innerHTML = String(html`
+    <p class="small"><a href="#/writing">← Writing</a></p>
+    <h1>Nhập đề Writing từ sách Cambridge</h1>
+    <form class="card stack" id="nf">
+      <div class="grid g4">
+        <label class="field">Cambridge IELTS số<input type="number" name="book" min="1" max="30" value="20" required></label>
+        <label class="field">Test<select name="test">${[1, 2, 3, 4].map((n) => html`<option>${n}</option>`)}</select></label>
+        <label class="field">Task<select name="task"><option value="1">Task 1</option><option value="2">Task 2</option></select></label>
+        <label class="field">Module<select name="module"><option value="academic" ${gt ? '' : 'selected'}>Academic</option><option value="general" ${gt ? 'selected' : ''}>General Training</option></select></label>
+      </div>
+      <label class="field">Đề bài (gõ hoặc dán nguyên văn từ sách)<textarea name="prompt" rows="8" required placeholder="The chart below shows …"></textarea></label>
+      <p class="small muted" style="margin:0">Với Task 1 Academic có biểu đồ: hãy mở hình trong sách bên cạnh khi viết. Đề chỉ lưu trên thiết bị của bạn.</p>
+      <div><button class="btn primary">Lưu & bắt đầu viết →</button></div>
+    </form>`);
+  $('#nf', el).addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const task = Number(f.get('task'));
+    const id = `cw-${f.get('book')}-${f.get('test')}-${task}-${Date.now().toString(36)}`;
+    const t = { id, task, module: task === 1 ? f.get('module') : 'both', title: `Cambridge ${f.get('book')} · Test ${f.get('test')} · Task ${task}`, prompt: String(f.get('prompt')).trim(), source: 'cambridge' };
+    store.update((s) => {
+      s.customTasks ||= [];
+      s.customTasks.push(t);
+    });
+    location.hash = `#/writing/${id}`;
+  });
 }
 
 function visual(t) {

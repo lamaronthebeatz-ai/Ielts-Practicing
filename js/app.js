@@ -13,6 +13,10 @@ const routes = [
   [/^\/writing\/([\w-]+)$/, 'writing', () => import('./views/writing.js')],
   [/^\/speaking$/, 'speaking', () => import('./views/speaking.js')],
   [/^\/speaking\/([\w-]+)$/, 'speaking', () => import('./views/speaking.js')],
+  [/^\/cambridge$/, 'cambridge', () => import('./views/cambridge.js')],
+  [/^\/cambridge\/([\w-]+)$/, 'cambridge', () => import('./views/cambridge.js')],
+  [/^\/grammar$/, 'grammar', () => import('./views/grammar.js')],
+  [/^\/grammar\/([\w-]+)$/, 'grammar', () => import('./views/grammar.js')],
   [/^\/vocab$/, 'vocab', () => import('./views/vocab.js')],
   [/^\/vocab\/(review)$/, 'vocab', () => import('./views/vocab.js')],
   [/^\/progress$/, 'progress', () => import('./views/progress.js')],
@@ -63,7 +67,7 @@ async function route() {
   }
   const [re, nav, loader] = match;
   const params = path.match(re).slice(1);
-  $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === nav || (nav !== 'home' && a.dataset.nav === 'more' && ['vocab', 'progress', 'guide', 'tools', 'settings', 'more'].includes(nav))));
+  $$('[data-nav]').forEach((a) => a.classList.toggle('active', a.dataset.nav === nav || (nav !== 'home' && a.dataset.nav === 'more' && ['cambridge', 'grammar', 'vocab', 'progress', 'guide', 'tools', 'settings', 'more'].includes(nav))));
   try {
     const mod = await loader();
     // A fresh container per route so event listeners attached by a view die with it.

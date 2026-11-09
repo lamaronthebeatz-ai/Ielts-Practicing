@@ -3,6 +3,7 @@ import { store } from '../store.js';
 import { readingTests, readingStrategies } from '../data/reading.js';
 import { renderGroups, bindInputs, grade, navBar, updateNav, bindJump, allQuestions } from '../quiz.js';
 import { rawToBand } from '../scoring.js';
+import { bindLookupPopup } from '../dictionary.js';
 
 export const TYPE_LABEL = { tfng: 'TRUE/FALSE/NOT GIVEN', ynng: 'YES/NO/NOT GIVEN', mcq: 'Multiple choice', match: 'Matching', gap: 'Completion (điền từ)' };
 
@@ -69,6 +70,7 @@ function renderTest(el, test) {
   };
   let timer = null;
   let saveT = null;
+  let closeDict = null;
 
   const persist = () => {
     clearTimeout(saveT);
@@ -90,6 +92,7 @@ function renderTest(el, test) {
           <li>3 passages, 40 câu hỏi. Mỗi câu đúng được 1 điểm; điểm thô được quy đổi sang band theo bảng ${store.get().profile.module === 'general' ? 'Academic (đề mẫu là Academic)' : 'Academic'}.</li>
           <li>Thời gian: 60 phút, đã bao gồm việc ghi đáp án.</li>
           <li>Bôi đen văn bản để <mark>tô sáng</mark>; bấm vào vùng tô sáng để bỏ.</li>
+          <li>Chế độ luyện tập (hoặc sau khi nộp bài): nhấp đúp vào một từ để tra từ điển.</li>
           <li>Bài làm được lưu tự động — bạn có thể quay lại sau.</li>
         </ul>
         <fieldset class="row" style="border:0;padding:0;margin:1rem 0">
@@ -168,6 +171,9 @@ function renderTest(el, test) {
       if (p !== state.passage) switchPassage(p);
     });
     bindHighlight($('#passage', el));
+    // Dictionary on double-click: only in practice mode or after submitting (never in timed exam conditions)
+    closeDict?.();
+    closeDict = bindLookupPopup($('#passage', el), () => state.mode === 'practice' || !!state.result);
   }
 
   function switchPassage(i) {
@@ -222,6 +228,7 @@ function renderTest(el, test) {
   intro();
   return () => {
     timer?.stop();
+    closeDict?.();
     if (state.started && !state.result) {
       state.remaining = timer?.remaining ?? state.remaining;
       clearTimeout(saveT);
@@ -234,7 +241,8 @@ function renderTest(el, test) {
 
 /** Allow highlighting text in the passage (like the computer-delivered test). */
 export function bindHighlight(container) {
-  container.addEventListener('mouseup', () => {
+  container.addEventListener('mouseup', (e) => {
+    if (e.detail >= 2) return; // double-click is reserved for dictionary lookup
     const sel = window.getSelection();
     if (!sel || sel.isCollapsed || !sel.rangeCount) return;
     const range = sel.getRangeAt(0);

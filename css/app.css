@@ -246,3 +246,33 @@ input.gap { width: 10rem; max-width: 100%; margin: 0 .3rem; padding: .25rem .5re
   * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 @media (max-width: 860px) { #toasts { bottom: calc(5rem + env(safe-area-inset-bottom)); } }
+
+/* Dictionary */
+.dict-word { font-size: 1.5rem; font-weight: 800; }
+.dict-pos { margin-top: .6rem; }
+.dict-defs { margin: .3rem 0 .3rem 1.2rem; padding: 0; }
+.dict-defs li { margin-bottom: .3rem; }
+.dict-pop { position: absolute; z-index: 200; width: min(340px, calc(100vw - 2rem)); max-height: 60vh; overflow-y: auto; }
+.dict-close { float: right; }
+.linklike { background: none; border: 0; padding: 0; color: var(--primary-2); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Grammar */
+.gtopic { display: flex; flex-direction: column; gap: .15rem; padding: .7rem .8rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.formulas th { width: 30%; }
+.formulas code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem; white-space: pre-wrap; background: var(--surface-2); padding: .1rem .35rem; border-radius: 5px; }
+li.use { padding: .5rem 0; border-bottom: 1px dashed var(--border); }
+li.use .ex { font-family: var(--serif); font-style: italic; margin-top: .2rem; padding-left: .8rem; border-left: 3px solid var(--primary-2); }
+td.wrong { color: var(--bad); text-decoration: line-through; text-decoration-thickness: 1px; }
+td.right { color: var(--ok); font-weight: 600; }
+
+/* Cambridge answer sheet */
+.sheet-sec { border: 1px solid var(--border); border-radius: 10px; padding: .6rem .8rem; margin: 0 0 .8rem; }
+.sheet-sec legend { font-weight: 700; padding: 0 .3rem; }
+.sheet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .4rem .8rem; }
+.sheet-cell { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .4rem; padding: .2rem; border-radius: 8px; }
+.sheet-cell input { width: 100%; min-height: 36px; }
+.sheet-cell .mark { grid-column: 2; font-size: .8rem; }
+.sheet-cell.ok { background: var(--ok-bg); }
+.sheet-cell.ok .mark { color: var(--ok); }
+.sheet-cell.bad { background: var(--bad-bg); }
+.sheet-cell.bad .mark { color: var(--bad); }

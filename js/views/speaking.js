@@ -7,8 +7,11 @@ import { say, stopSpeaking, ttsSupported } from '../tts.js';
 
 const SR = typeof window !== 'undefined' ? window.SpeechRecognition || window.webkitSpeechRecognition : null;
 
+const customCards = () => store.get().customCards || [];
+
 export function render(el, mode) {
   if (!mode) return renderList(el);
+  if (mode === 'new') return renderNew(el);
   let steps;
   let title;
   let full = false;
@@ -21,7 +24,7 @@ export function render(el, mode) {
     title = `Part 1 — ${topics.map((t) => t.topic).join(' & ')}`;
     steps = topics.flatMap((t, i) => [{ type: 'info', part: 1, text: i === 0 ? `Let's talk about ${t.topic.toLowerCase()}.` : `Now let's move on to ${t.topic.toLowerCase()}.` }, ...t.qs.map((q) => ({ type: 'ask', part: 1, text: q }))]);
   } else {
-    const card = part2.find((c) => c.id === mode);
+    const card = part2.find((c) => c.id === mode) || customCards().find((c) => c.id === mode);
     if (!card) {
       el.innerHTML = String(html`<div class="alert bad">Không tìm thấy cue card.</div>`);
       return;
@@ -30,6 +33,34 @@ export function render(el, mode) {
     steps = part2Steps(card);
   }
   return runSession(el, { title, steps, full, ref: mode });
+}
+
+function renderNew(el) {
+  el.innerHTML = String(html`
+    <p class="small"><a href="#/speaking">← Speaking</a></p>
+    <h1>Nhập cue card từ sách Cambridge</h1>
+    <form class="card stack" id="nf">
+      <div class="grid g2">
+        <label class="field">Cambridge IELTS số<input type="number" name="book" min="1" max="30" value="20" required></label>
+        <label class="field">Test<select name="test">${[1, 2, 3, 4].map((n) => html`<option>${n}</option>`)}</select></label>
+      </div>
+      <label class="field">Đề Part 2 (dòng "Describe …")<input type="text" name="card" required placeholder="Describe …"></label>
+      <label class="field">Các gợi ý "You should say:" (mỗi dòng một ý)<textarea name="bullets" rows="4" required></textarea></label>
+      <label class="field">Câu hỏi Part 3 liên quan (mỗi dòng một câu, không bắt buộc)<textarea name="p3" rows="5"></textarea></label>
+      <div><button class="btn primary">Lưu & bắt đầu →</button></div>
+    </form>`);
+  $('#nf', el).addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const lines = (k) => String(f.get(k) || '').split(/\n/).map((x) => x.replace(/^[-•*\s]+/, '').trim()).filter(Boolean);
+    const id = `cs-${f.get('book')}-${f.get('test')}-${Date.now().toString(36)}`;
+    const card = { id, card: String(f.get('card')).trim(), bullets: lines('bullets'), part3: lines('p3'), source: `Cambridge ${f.get('book')} · Test ${f.get('test')}` };
+    store.update((s) => {
+      s.customCards ||= [];
+      s.customCards.push(card);
+    });
+    location.hash = `#/speaking/${id}`;
+  });
 }
 
 function part2Steps(card) {
@@ -67,7 +98,10 @@ function renderList(el) {
     <div class="grid g3">
       <a class="card linkcard" href="#/speaking/full"><h3>🎯 Mô phỏng bài thi đầy đủ</h3><p class="small muted">Part 1 → Part 2 (1 phút chuẩn bị + 2 phút nói) → Part 3. Giám khảo đọc câu hỏi, toàn bộ bài được ghi âm để nghe lại và tự chấm.</p></a>
       <a class="card linkcard" href="#/speaking/p1"><h3>💬 Luyện Part 1</h3><p class="small muted">2 chủ đề ngẫu nhiên, mỗi chủ đề 4 câu hỏi.</p></a>
-      <div class="card"><h3>🗒 Luyện Part 2 & 3</h3><ul class="clean small">${part2.map((c) => html`<li style="margin:.3rem 0"><a href="#/speaking/${c.id}">${c.card}</a></li>`)}</ul></div>
+      <div class="card"><h3>🗒 Luyện Part 2 & 3</h3><ul class="clean small">${part2.map((c) => html`<li style="margin:.3rem 0"><a href="#/speaking/${c.id}">${c.card}</a></li>`)}</ul>
+        <h4 style="margin-top:.8rem">Cue card từ sách Cambridge của bạn</h4>
+        <ul class="clean small">${customCards().map((c) => html`<li style="margin:.3rem 0"><a href="#/speaking/${c.id}">${c.card}</a> <span class="muted">(${c.source})</span></li>`)}</ul>
+        <a class="btn sm" href="#/speaking/new">＋ Nhập cue card từ sách</a></div>
     </div>
     <div class="grid g2" style="margin-top:1rem">
       ${speakingTips.map((t) => html`<div class="card"><h3>${t.part}</h3><ul class="ticks small">${t.tips.map((x) => html`<li>${x}</li>`)}</ul></div>`)}

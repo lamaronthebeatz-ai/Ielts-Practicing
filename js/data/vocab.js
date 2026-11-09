@@ -91,13 +91,3 @@ export const vocab = [
     ['account for', 'phr v', 'chiếm (tỷ lệ); giải thích', 'Coal accounted for 40% of electricity in 2010.', 'account for a (large) proportion of'],
   ]),
 ];
-
-export const grammarNotes = [
-  { title: 'Câu phức & mệnh đề quan hệ', body: 'Kết hợp mệnh đề quan hệ xác định/không xác định, mệnh đề trạng ngữ (although, whereas, provided that) để đạt "variety of complex structures" (GRA band 7). Ví dụ: Graduates, who typically earn more over their lifetimes, could repay loans once their income exceeds a threshold.' },
-  { title: 'Câu bị động', body: 'Bắt buộc với process diagram (The bottles are sorted by colour). Trong Task 2 dùng để khách quan hóa: It is widely believed that… / It has been argued that…' },
-  { title: 'Câu điều kiện & giả định', body: 'If governments invested more in public transport, fewer people would drive. Dùng "were to", "should" đảo ngữ ở mức nâng cao: Were the government to raise taxes, …' },
-  { title: 'Danh từ hóa (nominalisation)', body: 'Văn phong học thuật ưu tiên danh từ: "The number of users increased rapidly" → "There was a rapid increase in the number of users".' },
-  { title: 'Thì trong Task 1', body: 'Dữ liệu quá khứ → quá khứ đơn; dữ liệu dự báo → will/is expected to/is projected to; process → hiện tại đơn (bị động). Không trộn thì vô căn cứ.' },
-  { title: 'Lỗi phổ biến của người Việt', body: 'Thiếu mạo từ (a/an/the) và -s số nhiều; nhầm "there have" thay vì "there are"; dùng sai "although… but" (chỉ dùng một trong hai); thiếu động từ "to be" (The price very high ✗); phát âm thiếu âm cuối (/s/, /t/, /d/, /k/) trong Speaking.' },
-  { title: 'Hedging (diễn đạt thận trọng)', body: 'tend to, are likely to, may, arguably, to a certain extent — tránh khái quát hóa tuyệt đối (all, always, never) vốn bị band descriptors đánh giá là "over-generalise".' },
-];

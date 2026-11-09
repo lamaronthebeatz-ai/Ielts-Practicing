@@ -1,6 +1,7 @@
 // Service worker: precache the app shell for full offline use.
 // Bump VERSION whenever any precached file changes.
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.1.0';
+const DICT_CACHE = 'ielts-prep-dict';
 const CACHE = `ielts-prep-${VERSION}`;
 
 const ASSETS = [
@@ -26,6 +27,14 @@ const ASSETS = [
   './js/data/descriptors.js',
   './js/data/format.js',
   './js/data/vocab.js',
+  './js/data/grammar/index.js',
+  './js/data/grammar/tenses.js',
+  './js/data/grammar/verbs.js',
+  './js/data/grammar/clauses.js',
+  './js/data/grammar/academic.js',
+  './js/dictionary.js',
+  './js/views/grammar.js',
+  './js/views/cambridge.js',
   './js/views/home.js',
   './js/views/guide.js',
   './js/views/reading.js',
@@ -47,7 +56,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('ielts-prep-') && k !== CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('ielts-prep-') && k !== CACHE && k !== DICT_CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });
@@ -60,6 +69,22 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Dictionary lookups and pronunciation audio: cache-first so looked-up words work offline.
+  if (url.hostname === 'api.dictionaryapi.dev') {
+    event.respondWith(
+      caches.open(DICT_CACHE).then((c) =>
+        c.match(req).then(
+          (hit) =>
+            hit ||
+            fetch(req).then((res) => {
+              if (res.ok) c.put(req, res.clone());
+              return res;
+            }),
+        ),
+      ),
+    );
+    return;
+  }
   if (url.origin !== self.location.origin) return;
 
   if (req.mode === 'navigate') {

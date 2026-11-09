@@ -99,7 +99,8 @@ test('service worker precaches every app module', () => {
   const files = [
     ...readdirSync(new URL('../js', import.meta.url)).filter((f) => f.endsWith('.js')).map((f) => `./js/${f}`),
     ...readdirSync(new URL('../js/views', import.meta.url)).map((f) => `./js/views/${f}`),
-    ...readdirSync(new URL('../js/data', import.meta.url)).map((f) => `./js/data/${f}`),
+    ...readdirSync(new URL('../js/data', import.meta.url)).filter((f) => f.endsWith('.js')).map((f) => `./js/data/${f}`),
+    ...readdirSync(new URL('../js/data/grammar', import.meta.url)).filter((f) => f.endsWith('.js')).map((f) => `./js/data/grammar/${f}`),
   ];
   for (const f of files) assert.ok(sw.includes(`'${f}'`), `${f} missing from sw.js ASSETS`);
 });
